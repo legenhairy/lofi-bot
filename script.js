@@ -75,7 +75,6 @@ function prevSong() {
     if (songIndex < 0) {
         songIndex = songs.length - 1;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
     playSong();
 }
@@ -86,7 +85,6 @@ function nextSong() {
     if (songIndex > songs.length - 1) {
         songIndex = 0;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
     playSong();
 }
@@ -99,7 +97,6 @@ function updateProgressBar(e) {
     if (isPlaying) {
         //duration is total length of the music file, currentTime is current point song is playing at
         const { duration, currentTime } = e.srcElement;
-        console.log(duration, currentTime);
         // Update progress bar width
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
@@ -141,3 +138,8 @@ nextBtn.addEventListener('click', nextSong);
 music.addEventListener('ended', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
+window.addEventListener('keydown', (event) => {   
+    if(event.code === "Space") {
+        isPlaying ? pauseSong() : playSong();
+    }
+});
