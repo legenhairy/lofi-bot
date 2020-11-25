@@ -138,8 +138,16 @@ nextBtn.addEventListener('click', nextSong);
 music.addEventListener('ended', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
-window.addEventListener('keydown', (event) => {   
+window.addEventListener('keydown', (event) => {   //add ability to play/pause, go to next song and back with keys
     if(event.code === "Space") {
+        event.preventDefault();
         isPlaying ? pauseSong() : playSong();
     }
+
+    if(event.code === "ArrowRight") { //jump to next song
+        nextSong();
+    }
+    if(event.code === "ArrowLeft") { //go back a song 
+        prevSong();
+    }    
 });
